@@ -215,3 +215,59 @@ TEST(TCalculator, example_5)
 	EXPECT_EQ("256 12 2 ^2/-", tmp.GetPostfix());
 	EXPECT_EQ(184, tmp.Calculator());
 }
+TEST(TCalculator, test_sin) 
+{
+	TCalculator tmp;
+	tmp.SetInfix("sin(30)");
+	tmp.ToPostfix();
+	EXPECT_EQ("30s", tmp.GetPostfix());
+	EXPECT_EQ(0.5,tmp.Calculator());
+}
+TEST(Tcalculator, test_sin_2) 
+{
+	TCalculator tmp;
+	tmp.SetInfix("5*sin(30)+2");
+	tmp.ToPostfix();
+	EXPECT_EQ("5 30 s*2+", tmp.GetPostfix());
+	EXPECT_EQ(4.5, tmp.Calculator());
+}
+TEST(TCalculator, test_cos)
+{
+	TCalculator tmp;
+	tmp.SetInfix("cos(60)");
+	tmp.ToPostfix();
+	EXPECT_EQ("60c", tmp.GetPostfix());
+	EXPECT_EQ(0.5, tmp.Calculator());
+}
+
+TEST(TCalculator, test_cos_2)
+{
+	TCalculator tmp;
+	tmp.SetInfix("cos(60)*2");
+	tmp.ToPostfix();
+	EXPECT_EQ("60 c2*", tmp.GetPostfix());
+	EXPECT_EQ(1, tmp.Calculator());
+}
+
+TEST(TCalculator, test_tg)
+{
+	TCalculator tmp;
+	tmp.SetInfix("tg(45)");
+	tmp.ToPostfix();
+	EXPECT_EQ("45t", tmp.GetPostfix());
+	EXPECT_EQ(1, tmp.Calculator());
+}
+TEST(TCalculator, test_tg_2)
+{
+	TCalculator tmp;
+	tmp.SetInfix("tg(10+35)*2");
+	tmp.ToPostfix();
+	EXPECT_EQ("10 35+ t2*", tmp.GetPostfix());
+	EXPECT_EQ(2, tmp.Calculator());
+}
+TEST(TCalculator, error_symbol) 
+{
+	TCalculator tmp;
+	tmp.SetInfix("son(35)");
+	EXPECT_ANY_THROW(tmp.ToPostfix());
+}

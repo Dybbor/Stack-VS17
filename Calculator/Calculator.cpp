@@ -1,4 +1,5 @@
 #include "Calculator.h"
+#define PI 3.14159265
 
 TCalculator::TCalculator()
 {
@@ -26,6 +27,12 @@ int TCalculator::Priority(const char m) const
 		return 2;
 	case  '^':
 		return 3;
+	case 's':
+		return 4;
+	case 'c':
+		return 4;
+	case 't':
+		return 4;
 	default:throw m;
 	}
 }
@@ -55,6 +62,19 @@ void TCalculator::ToPostfix()
 				postfix += StackOperation.Pop();
 			}
 			StackOperation.Push(tmp[i]);
+		}
+		if (tmp[i] == 's'|| tmp[i] == 'c'|| tmp[i] == 't')
+		{
+			if (i == tmp.find("sin") || i == tmp.find("cos") || i == tmp.find("tg"))
+			{
+				StackOperation.Push(tmp[i]);
+				if (tmp[i] == 's' || tmp[i] == 'c')
+					i += 2;
+				else
+					i ++;
+			}
+			else
+				throw "Error symbol";
 		}
 	}
 }
@@ -204,6 +224,24 @@ double TCalculator::Calculator()
 			StackNumber.Push(x);
 			int Lenght = p - &postfix[i];
 			i += Lenght - 1;
+		}
+		if (postfix[i] == 's' || postfix[i] == 'c' || postfix[i] == 't')
+		{
+			switch (postfix[i]) 
+			{
+			case 's':
+				res = sin(StackNumber.Pop()*PI/180);
+				StackNumber.Push(res);
+				break;
+			case 'c':
+				res = cos(StackNumber.Pop()*PI/180);
+				StackNumber.Push(res);
+				break;
+			case 't':
+				res = tan(StackNumber.Pop()*PI/180);
+				StackNumber.Push(res);
+				break;
+			}
 		}
 	}
 	tmp = StackNumber.Pop();

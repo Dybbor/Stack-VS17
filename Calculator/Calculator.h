@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <cmath>
 #include "..\Stack\Stack.h"
 
 using namespace std;
