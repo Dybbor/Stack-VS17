@@ -161,7 +161,7 @@ bool TCalculator::CheckOperator()
 }
 double TCalculator::Calculator()
 {
-	double num1, num2, res, tmp;
+	double num1, num2, res, tmp,a;
 	StackNumber.Clear();
 	for (int i = 0; i < postfix.size(); i++)
 	{
@@ -189,6 +189,7 @@ double TCalculator::Calculator()
 
 			}
 			StackNumber.Push(res);
+			 a = StackNumber.Top();
 		}
 		if (postfix[i] >= '0' && postfix[i] <= '9')
 		{
