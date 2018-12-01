@@ -2,7 +2,7 @@
 #include "Stack.h"
 #include "..\Calculator\Calculator.h"
 using namespace std;
-bool Check(string str)
+/*bool Check(string str)
 {
 	TStack <char> st(10);
 
@@ -20,21 +20,26 @@ bool Check(string str)
 		return true;
 	else
 		return false;
-}
+}*/
 void main()
 {
-	/*string str = "He((((llo)wor)ld))";
-	cout << Check(str) << endl;
 	TCalculator tcal;
+	setlocale(LC_ALL, "Russian");
+	while (1) {
+		cout << "Введите пример" << endl;
+		tcal.SetInfix();
+		if (!(tcal.CheckBrackets()))
+			cout << "Введены неправильно скобки" << endl;
+		if (!(tcal.CheckOperator()))
+			cout << "Неправильно введены операции" << endl;
+		if (tcal.CheckBrackets() && tcal.CheckOperator())
+		{
+			tcal.ToPostfix();
+			cout << "Ответ: " << tcal.Calculator() << endl;;
+		}
+	}
 
-	while (1)
-	{
-		//tcal.SetInfix();
-		cout << tcal.GetPostfix() << endl;;
-		cout << tcal.Calculator() << endl;*/
-	TCalculator tmp;
-	tmp.SetInfix();
-	cout << tmp.CheckBrackets();
+
 	system("pause");
 }
 

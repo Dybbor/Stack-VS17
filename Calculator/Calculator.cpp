@@ -152,6 +152,11 @@ bool TCalculator::CheckOperator()
 {
 	if (infix == "\0")
 		throw "Empty String";
+	if (infix[0] == '+' || infix[0] == '-' || infix[0] == '*' || infix[0] == '/' || infix[0] == '^')
+		return false;
+	if (infix[infix.size()-1] == '+' || infix[infix.size() - 1] == '-' || infix[infix.size() - 1] == '*' 
+				|| infix[infix.size() - 1] == '/' || infix[infix.size() - 1] == '^')
+		return false;
 	for (int i = 0; i < infix.size()-1; i++) {
 		if ((infix[i] == '+' || infix[i] == '-' || infix[i] == '*' || infix[i] == '/' || infix[i] == '^') &&
 			(infix[i + 1] == '+' || infix[i + 1] == '-' || infix[i + 1] == '*' || infix[i + 1] == '/' || infix[i + 1] == '^'))
@@ -181,7 +186,7 @@ double TCalculator::Calculator()
 				res = num1 * num2;
 				break;
 			case '/':
-				res = num1 / num2;
+					res = num1 / num2;
 				break;
 			case '^':
 				res = pow(num1, num2);
