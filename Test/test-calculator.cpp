@@ -114,7 +114,6 @@ TEST(TCalculator, ToPostfix_simple_add)
 	TCalculator tmp;
 	tmp.SetInfix("2+2");
 	tmp.ToPostfix();
-	cout << tmp.GetPostfix();
 	EXPECT_EQ("2 2+", tmp.GetPostfix());
 }
 
@@ -123,7 +122,6 @@ TEST(TCalculator, ToPostfix_simple_minus)
 	TCalculator tmp;
 	tmp.SetInfix("2-2");
 	tmp.ToPostfix();
-	cout << tmp.GetPostfix();
 	EXPECT_EQ("2 2-", tmp.GetPostfix());
 }
 
@@ -140,7 +138,6 @@ TEST(TCalculator, ToPostfix_simple_multiplication)
 	TCalculator tmp;
 	tmp.SetInfix("2*2");
 	tmp.ToPostfix();
-	cout << tmp.GetPostfix();
 	EXPECT_EQ("2 2*", tmp.GetPostfix());
 }
 TEST(TCalculator, ToPostfix_simple_division)
@@ -148,7 +145,6 @@ TEST(TCalculator, ToPostfix_simple_division)
 	TCalculator tmp;
 	tmp.SetInfix("2/2");
 	tmp.ToPostfix();
-	cout << tmp.GetPostfix();
 	EXPECT_EQ("2 2/", tmp.GetPostfix());
 
 }
@@ -157,6 +153,39 @@ TEST(TCalculator, ToPostfix_simple_degree)
 	TCalculator tmp;
 	tmp.SetInfix("2^2");
 	tmp.ToPostfix();
-	cout << tmp.GetPostfix();
 	EXPECT_EQ("2 2^", tmp.GetPostfix());
+}
+TEST(TCalculator, ToPostix_1) 
+{
+	TCalculator tmp;
+	tmp.SetInfix("(2+2)*2");
+	tmp.ToPostfix();
+	cout << tmp.GetPostfix();
+	EXPECT_EQ("2 2+ 2*", tmp.GetPostfix());
+}
+
+TEST(TCalculator, ToPostix_2)
+{
+	TCalculator tmp;
+	tmp.SetInfix("1/(2+2)+2");
+	tmp.ToPostfix();
+	cout << tmp.GetPostfix();
+	EXPECT_EQ("1 2 2+ /2+", tmp.GetPostfix());
+}
+TEST(TCalculator, ToPostix_3)
+{
+	TCalculator tmp;
+	tmp.SetInfix("1/(2+2)^3+2");
+	tmp.ToPostfix();
+	cout << tmp.GetPostfix();
+	EXPECT_EQ("1 2 2+ 3 ^/2+", tmp.GetPostfix());
+}
+
+TEST(TCalculator, ToPostix_4)
+{
+	TCalculator tmp;
+	tmp.SetInfix("1/(2+2)^(3+2)");
+	tmp.ToPostfix();
+	cout << tmp.GetPostfix();
+	EXPECT_EQ("1 2 2+ 3 2+^/", tmp.GetPostfix());
 }
