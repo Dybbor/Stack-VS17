@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Stack.h"
+#include "..\Calculator\Calculator.h"
 using namespace std;
 bool Check(string str)
 {
@@ -22,15 +23,18 @@ bool Check(string str)
 }
 void main()
 {
-	string str = "He((((llo)wor)ld))";
+	/*string str = "He((((llo)wor)ld))";
 	cout << Check(str) << endl;
-	/*TCalculator tcal;
+	TCalculator tcal;
 
-	//while (1)
+	while (1)
 	{
 		//tcal.SetInfix();
 		cout << tcal.GetPostfix() << endl;;
 		cout << tcal.Calculator() << endl;*/
+	TCalculator tmp;
+	tmp.SetInfix();
+	cout << tmp.CheckBrackets();
 	system("pause");
 }
 

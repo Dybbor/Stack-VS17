@@ -15,7 +15,10 @@ private:
 public:
 	void ToPostfix();
 	void SetInfix(string _infix);
+	void SetInfix();
 	string GetPostfix();
+	bool CheckBrackets(); 
+	bool CheckOperator();
 	double Calculator();
 	TCalculator();
 	~TCalculator();

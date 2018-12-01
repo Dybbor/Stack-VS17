@@ -2,6 +2,7 @@
 
 TCalculator::TCalculator()
 {
+	infix = "\0";
 }
 
 
@@ -60,22 +61,60 @@ void TCalculator::ToPostfix()
 void TCalculator::SetInfix(string  _infix)
 {
 	infix = _infix;
-	/*infix.clear();
-	char c;
+}
+void TCalculator::SetInfix() 
+{
+	infix.clear();
+	/*char c;
 	while (1)
 	{
-	c = getchar();
-	if (c == '\n')
-	break;
-	else
-	infix += c;
+		c = getchar();
+		if (c == '\n')
+			break;
+		else
+			infix += c;
 	}*/
+	string tmp;
+	cin >> tmp;
+	infix = tmp;
 }
 string TCalculator::GetPostfix()
 {
 	return postfix;
 }
 
+bool TCalculator::CheckBrackets() 
+{
+	TStack <char> bracket(infix.length());
+	if (infix == "\0")
+		throw "Empty string";
+	for (int i = 0; i < infix.length(); i++)
+		if (infix[i] == '(')
+			bracket.Push(infix[i]);
+		else if (infix[i] == ')')
+		{
+			if (bracket.IsEmpty())
+				return false;
+			else
+				bracket.Pop();
+		}
+	if (bracket.IsEmpty())
+		return true;
+	else
+		return false;
+}
+
+bool TCalculator::CheckOperator() 
+{
+	if (infix == "\0")
+		throw "Empty String";
+	for (int i = 0; i < infix.size()-1; i++) {
+		if ((infix[i] == '+' || infix[i] == '-' || infix[i] == '*' || infix[i] == '/' || infix[i] == '^') &&
+			(infix[i + 1] == '+' || infix[i + 1] == '-' || infix[i + 1] == '*' || infix[i + 1] == '/' || infix[i + 1] == '^'))
+			return false;
+	}
+	return true;
+}
 double TCalculator::Calculator()
 {
 	double num1, num2, res, tmp;
