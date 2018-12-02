@@ -2,6 +2,8 @@
 #include "Stack.h"
 #include "..\Calculator\Calculator.h"
 using namespace std;
+//Формы починились
+
 /*bool Check(string str)
 {
 	TStack <char> st(10);
@@ -21,7 +23,7 @@ using namespace std;
 	else
 		return false;
 }*/
-void main()
+void Main()
 {
 	TCalculator tcal;
 	setlocale(LC_ALL, "Russian");
@@ -38,8 +40,6 @@ void main()
 			cout << "Ответ: " << tcal.Calculator() << endl;;
 		}
 	}
-
-
 	system("pause");
 }
 

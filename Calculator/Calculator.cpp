@@ -1,6 +1,8 @@
 #include "Calculator.h"
 #define PI 3.14159265
 
+using namespace std;
+
 TCalculator::TCalculator()
 {
 	infix = "\0";
@@ -74,7 +76,7 @@ void TCalculator::ToPostfix()
 					i ++;
 			}
 			else
-				throw "Error symbol";
+				throw 5;
 		}
 	}
 }
@@ -150,28 +152,31 @@ string TCalculator::GetPostfix()
 bool TCalculator::CheckBrackets() 
 {
 	TStack <char> bracket(infix.length());
-	if (infix == "\0")
-		throw "Empty string";
-	for (int i = 0; i < infix.length(); i++)
-		if (infix[i] == '(')
-			bracket.Push(infix[i]);
-		else if (infix[i] == ')')
-		{
-			if (bracket.IsEmpty())
-				return false;
-			else
-				bracket.Pop();
-		}
-	if (bracket.IsEmpty())
-		return true;
+	if (infix == "")
+		throw 'a';
 	else
-		return false;
+	{
+		for (int i = 0; i < infix.length(); i++)
+			if (infix[i] == '(')
+				bracket.Push(infix[i]);
+			else if (infix[i] == ')')
+			{
+				if (bracket.IsEmpty())
+					return false;
+				else
+					bracket.Pop();
+			}
+		if (bracket.IsEmpty())
+			return true;
+		else
+			return false;
+	}
 }
 
 bool TCalculator::CheckOperator() 
 {
-	if (infix == "\0")
-		throw "Empty String";
+	if (infix == "")
+		throw 'a';
 	if (infix[0] == '+' || infix[0] == '-' || infix[0] == '*' || infix[0] == '/' || infix[0] == '^')
 		return false;
 	if (infix[infix.size()-1] == '+' || infix[infix.size() - 1] == '-' || infix[infix.size() - 1] == '*' 
@@ -187,66 +192,71 @@ bool TCalculator::CheckOperator()
 double TCalculator::Calculator()
 {
 	double num1, num2, res, tmp,a;
-	StackNumber.Clear();
-	for (int i = 0; i < postfix.size(); i++)
-	{
-		if (postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/' || postfix[i] == '^')
+	int size=postfix.size();
+	if (size == 0)
+		throw size;
+	else {
+		StackNumber.Clear();
+		for (int i = 0; i < postfix.size(); i++)
 		{
-			num2 = StackNumber.Pop();
-			num1 = StackNumber.Pop();
-			switch (postfix[i])
+			if (postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/' || postfix[i] == '^')
 			{
-			case '+':
-				res = num1 + num2;
-				break;
-			case '-':
-				res = num1 - num2;
-				break;
-			case '*':
-				res = num1 * num2;
-				break;
-			case '/':
+				num2 = StackNumber.Pop();
+				num1 = StackNumber.Pop();
+				switch (postfix[i])
+				{
+				case '+':
+					res = num1 + num2;
+					break;
+				case '-':
+					res = num1 - num2;
+					break;
+				case '*':
+					res = num1 * num2;
+					break;
+				case '/':
 					res = num1 / num2;
-				break;
-			case '^':
-				res = pow(num1, num2);
-				break;
+					break;
+				case '^':
+					res = pow(num1, num2);
+					break;
 
+				}
+				StackNumber.Push(res);
+				a = StackNumber.Top();
 			}
-			StackNumber.Push(res);
-			 a = StackNumber.Top();
-		}
-		if (postfix[i] >= '0' && postfix[i] <= '9')
-		{
-			char *p;
-			double x;
-			x = strtod(&postfix[i], &p);
-			StackNumber.Push(x);
-			int Lenght = p - &postfix[i];
-			i += Lenght - 1;
-		}
-		if (postfix[i] == 's' || postfix[i] == 'c' || postfix[i] == 't')
-		{
-			switch (postfix[i]) 
+			if (postfix[i] >= '0' && postfix[i] <= '9')
 			{
-			case 's':
-				res = sin(StackNumber.Pop()*PI/180);
-				StackNumber.Push(res);
-				break;
-			case 'c':
-				res = cos(StackNumber.Pop()*PI/180);
-				StackNumber.Push(res);
-				break;
-			case 't':
-				res = tan(StackNumber.Pop()*PI/180);
-				StackNumber.Push(res);
-				break;
+				char *p;
+				double x;
+				x = strtod(&postfix[i], &p);
+				StackNumber.Push(x);
+				int Lenght = p - &postfix[i];
+				i += Lenght - 1;
+			}
+			if (postfix[i] == 's' || postfix[i] == 'c' || postfix[i] == 't')
+			{
+				switch (postfix[i])
+				{
+				case 's':
+					res = sin(StackNumber.Pop()*PI / 180);
+					StackNumber.Push(res);
+					break;
+				case 'c':
+					res = cos(StackNumber.Pop()*PI / 180);
+					StackNumber.Push(res);
+					break;
+				case 't':
+					res = tan(StackNumber.Pop()*PI / 180);
+					StackNumber.Push(res);
+					break;
+				}
 			}
 		}
+		tmp = StackNumber.Pop();
+		if (StackNumber.IsEmpty())
+			return tmp;
+		else
+			throw 4;
 	}
-	tmp = StackNumber.Pop();
-	if (StackNumber.IsEmpty())
-		return tmp;
-	else
-		throw "Error";
 }
