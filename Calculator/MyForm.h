@@ -106,7 +106,7 @@ namespace Calculator {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Bisque;
-			this->ClientSize = System::Drawing::Size(318, 99);
+			this->ClientSize = System::Drawing::Size(323, 87);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox1);
