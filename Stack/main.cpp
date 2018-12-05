@@ -1,36 +1,35 @@
 #include <iostream>
 #include "Stack.h"
+#include "..\Calculator\Calculator.h"
 using namespace std;
-bool Check(string str)
-{
-	TStack <char> st(10);
+//Формы починились
 
-	for (int i = 0; i < str.length(); i++)
-		if (str[i] == '(')
-			st.Push(str[i]);
-		else if (str[i] == ')')
+void Main()
+{
+	TCalculator tcal;
+	setlocale(LC_ALL, "Russian");
+	while (1) {
+		system("cls");
+		cout << "Введите пример" << endl;
+		tcal.SetInfix();
+		if (!(tcal.CheckBrackets()))
+			cout << "Введены неправильно скобки" << endl;
+		if (!(tcal.CheckOperator()))
+			cout << "Неправильно введены операции" << endl;
+		if (tcal.CheckBrackets() && tcal.CheckOperator())
 		{
-			if (st.IsEmpty())
-				return false;
-			else
-				st.Pop();
+			try
+			{
+				tcal.ToPostfix();
+				cout << "Ответ: " << tcal.Calculator() << endl;
+			}
+			catch (int k)
+			{
+				cout << "Неправильно введены данные" << endl;
+			}
 		}
-	if (st.IsEmpty())
-		return true;
-	else
-		return false;
-}
-void main()
-{
-	string str = "He((((llo)wor)ld))";
-	cout << Check(str) << endl;
-	/*TCalculator tcal;
-
-	//while (1)
-	{
-		//tcal.SetInfix();
-		cout << tcal.GetPostfix() << endl;;
-		cout << tcal.Calculator() << endl;*/
-	system("pause");
+		system("pause");
+	}
+	
 }
 
