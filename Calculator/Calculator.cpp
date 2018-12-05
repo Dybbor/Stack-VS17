@@ -1,5 +1,6 @@
 #include "Calculator.h"
-#define PI 3.14159265
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 using namespace std;
 
@@ -81,49 +82,6 @@ void TCalculator::ToPostfix()
 	}
 }
 
-
-/*void TCalculator::ToPostfix()
-{
-	postfix = "";
-	StackOperation.Clear();
-	string tmp = "(" + infix + ")";
-	for (int i = 0; i < tmp.size(); i++)
-	{
-		if (tmp[i] == '(')
-			StackOperation.Push(tmp[i]);
-		if (tmp[i] >= '0'&& tmp[i] <= '9')
-			postfix += tmp[i];
-		if (tmp[i] == ')')
-		{
-			while (StackOperation.Top() != '(')
-				postfix += StackOperation.Pop();
-			StackOperation.Pop();
-		}
-		if (tmp[i] == '+' || tmp[i] == '*' || tmp[i] == '/' || tmp[i] == '^')
-		{
-			postfix += ' ';
-			while (Priority(tmp[i]) <= Priority(StackOperation.Top()))
-			{
-				postfix += StackOperation.Pop();
-			}
-			StackOperation.Push(tmp[i]);
-		}
-		if (tmp[i] == '-') 
-		{
-			postfix+='0';
-			postfix += ' ';
-			i++;
-			while (tmp[i] >= '0'&& tmp[i] <= '9')
-			{
-				postfix += tmp[i];
-				if (tmp[i] == '\0');
-				break;
-			}
-			postfix += '-';
-		}
-	}
-}*/
-
 void TCalculator::SetInfix(string  _infix)
 {
 	infix = _infix;
@@ -131,15 +89,6 @@ void TCalculator::SetInfix(string  _infix)
 void TCalculator::SetInfix() 
 {
 	infix.clear();
-	/*char c;
-	while (1)
-	{
-		c = getchar();
-		if (c == '\n')
-			break;
-		else
-			infix += c;
-	}*/
 	string tmp;
 	cin >> tmp;
 	infix = tmp;
@@ -239,15 +188,15 @@ double TCalculator::Calculator()
 				switch (postfix[i])
 				{
 				case 's':
-					res = sin(StackNumber.Pop()*PI / 180);
+					res = sin(StackNumber.Pop()*M_PI / 180);
 					StackNumber.Push(res);
 					break;
 				case 'c':
-					res = cos(StackNumber.Pop()*PI / 180);
+					res = cos(StackNumber.Pop()*M_PI / 180);
 					StackNumber.Push(res);
 					break;
 				case 't':
-					res = tan(StackNumber.Pop()*PI / 180);
+					res = tan(StackNumber.Pop()*M_PI / 180);
 					StackNumber.Push(res);
 					break;
 				}

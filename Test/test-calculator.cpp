@@ -140,13 +140,6 @@ TEST(TCalculator, simple_example_minus)
 	EXPECT_EQ(0, tmp.Calculator());
 }
 
-TEST(TCalculator, ToPostfix_only_minus)
-{
-	TCalculator tmp;
-	tmp.SetInfix("-5");
-	tmp.ToPostfix();
-	EXPECT_EQ("0 5-", tmp.GetPostfix());
-}
 TEST(TCalculator, simple_example_multiplication)
 {
 	TCalculator tmp;
@@ -214,55 +207,85 @@ TEST(TCalculator, example_5)
 	EXPECT_EQ("256 12 2 ^2/-", tmp.GetPostfix());
 	EXPECT_EQ(184, tmp.Calculator());
 }
-TEST(TCalculator, test_sin) 
+TEST(TCalculator, test_sin)
 {
 	TCalculator tmp;
+	bool check;
 	tmp.SetInfix("sin(30)");
 	tmp.ToPostfix();
+	if (abs(0.5 - tmp.Calculator()) < pow(10, -10))
+		check = true;
+	else
+		check = false;
 	EXPECT_EQ("30s", tmp.GetPostfix());
-	EXPECT_EQ(0.5,tmp.Calculator());
+	EXPECT_EQ(true, check);
 }
-TEST(Tcalculator, test_sin_2) 
+TEST(Tcalculator, test_sin_2)
 {
 	TCalculator tmp;
+	bool check;
 	tmp.SetInfix("5*sin(30)+2");
 	tmp.ToPostfix();
+	if (abs(4.5 - tmp.Calculator()) < pow(10, -10))
+		check = true;
+	else
+		check = false;
 	EXPECT_EQ("5 30 s*2+", tmp.GetPostfix());
-	EXPECT_EQ(4.5, tmp.Calculator());
+	EXPECT_EQ(true, check);
 }
 TEST(TCalculator, test_cos)
 {
 	TCalculator tmp;
+	bool check;
 	tmp.SetInfix("cos(60)");
 	tmp.ToPostfix();
+	if (abs(0.5 - tmp.Calculator()) < pow(10, -10))
+		check = true;
+	else
+		check = false;
 	EXPECT_EQ("60c", tmp.GetPostfix());
-	EXPECT_EQ(0.5, tmp.Calculator());
+	EXPECT_EQ(true, check);
 }
 
 TEST(TCalculator, test_cos_2)
 {
 	TCalculator tmp;
+	bool check;
 	tmp.SetInfix("cos(60)*2");
 	tmp.ToPostfix();
+	if (abs(1 - tmp.Calculator()) < pow(10, -10))
+		check = true;
+	else
+		check = false;
 	EXPECT_EQ("60 c2*", tmp.GetPostfix());
-	EXPECT_EQ(1, tmp.Calculator());
+	EXPECT_EQ(true, check);
 }
 
 TEST(TCalculator, test_tg)
 {
 	TCalculator tmp;
+	bool check;
 	tmp.SetInfix("tg(45)");
 	tmp.ToPostfix();
+	if (abs(1 - tmp.Calculator()) < pow(10, -10))
+		check = true;
+	else
+		check = false;
 	EXPECT_EQ("45t", tmp.GetPostfix());
-	EXPECT_EQ(1, tmp.Calculator());
+	EXPECT_EQ(true, check);
 }
 TEST(TCalculator, test_tg_2)
 {
 	TCalculator tmp;
+	bool check;
 	tmp.SetInfix("tg(10+35)*2");
 	tmp.ToPostfix();
+	if (abs(2 - tmp.Calculator()) < pow(10, -10))
+		check = true;
+	else
+		check = false;
 	EXPECT_EQ("10 35+ t2*", tmp.GetPostfix());
-	EXPECT_EQ(2, tmp.Calculator());
+	EXPECT_EQ(true, check);
 }
 TEST(TCalculator, error_symbol) 
 {

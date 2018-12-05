@@ -4,30 +4,12 @@
 using namespace std;
 //Формы починились
 
-/*bool Check(string str)
-{
-	TStack <char> st(10);
-
-	for (int i = 0; i < str.length(); i++)
-		if (str[i] == '(')
-			st.Push(str[i]);
-		else if (str[i] == ')')
-		{
-			if (st.IsEmpty())
-				return false;
-			else
-				st.Pop();
-		}
-	if (st.IsEmpty())
-		return true;
-	else
-		return false;
-}*/
 void Main()
 {
 	TCalculator tcal;
 	setlocale(LC_ALL, "Russian");
 	while (1) {
+		system("cls");
 		cout << "Введите пример" << endl;
 		tcal.SetInfix();
 		if (!(tcal.CheckBrackets()))
@@ -36,10 +18,18 @@ void Main()
 			cout << "Неправильно введены операции" << endl;
 		if (tcal.CheckBrackets() && tcal.CheckOperator())
 		{
-			tcal.ToPostfix();
-			cout << "Ответ: " << tcal.Calculator() << endl;;
+			try
+			{
+				tcal.ToPostfix();
+				cout << "Ответ: " << tcal.Calculator() << endl;
+			}
+			catch (int k)
+			{
+				cout << "Неправильно введены данные" << endl;
+			}
 		}
+		system("pause");
 	}
-	system("pause");
+	
 }
 

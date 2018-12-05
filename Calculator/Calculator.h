@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <cmath>
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include "..\Stack\Stack.h"
 
 //using namespace std;
