@@ -145,7 +145,6 @@ TEST(TCalculator, ToPostfix_only_minus)
 	TCalculator tmp;
 	tmp.SetInfix("-5");
 	tmp.ToPostfix();
-	cout << tmp.GetPostfix();
 	EXPECT_EQ("0 5-", tmp.GetPostfix());
 }
 TEST(TCalculator, simple_example_multiplication)
