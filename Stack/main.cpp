@@ -4,7 +4,7 @@
 using namespace std;
 //Формы починились
 
-void Main()
+void main()
 {
 	TCalculator tcal;
 	setlocale(LC_ALL, "Russian");
