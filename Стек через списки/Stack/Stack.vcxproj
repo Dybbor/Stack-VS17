@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Calculator\Calculator.h" />
     <ClInclude Include="List_stack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Calculator\Calculator.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
