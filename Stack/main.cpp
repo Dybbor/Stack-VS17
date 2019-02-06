@@ -1,8 +1,7 @@
 #include <iostream>
-#include "Stack.h"
+//#include "Stack.h"
 #include "..\Calculator\Calculator.h"
 using namespace std;
-//Формы починились
 
 void main()
 {

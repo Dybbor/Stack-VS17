@@ -3,7 +3,8 @@
 #include <string>
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include "..\Stack\Stack.h"
+//#include "..\Stack\Stack.h"        //Закоментировать нужное
+#include "..\Stack\List_stack.h"	
 
 //using namespace std;
 

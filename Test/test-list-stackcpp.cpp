@@ -49,4 +49,17 @@ TEST(TStack, count_element_in_stack1) //Количество эелементов стеке
 		s.Push(i);
 	EXPECT_EQ(2, s.Count());
 }
+TEST(TStack, count_element_in_stack2) //Количество эелементов стеке
+{
+	TStack <int> s;
+	EXPECT_EQ(0, s.Count());
+}
+TEST(TStack, clear_stack1) 
+{
+	TStack <int> s;
+	for (int i = 0; i<3; i++)
+		s.Push(i);
+	s.Clear();
+	EXPECT_EQ(0, s.Count());
+}
 

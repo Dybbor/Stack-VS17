@@ -19,6 +19,7 @@ public:
 	T Top();			//Посмотреть что находится на вершине стека
 	bool IsEmpty();		//Проверка на пустоту стека
 	int  Count();		//Количество звеньев в стеке
+	void Clear();
 };
 
 template <class T>
@@ -73,12 +74,30 @@ T TStack <T> ::Pop()
  template <class T>
  int TStack <T> ::Count() 
  {
-	 TLink <T> * tmp = pFirst;
-	 int count=0;
-	 while (tmp->pNext != NULL)
+	 int count = 0;
+	 if (IsEmpty())
+		 return count;
+	 else
 	 {
-		 tmp = tmp->pNext;
-		 count++;
+		 TLink <T> * tmp = pFirst;
+		 while (tmp->pNext != NULL)
+		 {
+			 tmp = tmp->pNext;
+			 count++;
+		 }
+		 return count;
 	 }
-	 return count;
+ }
+
+ template <class T>
+ void TStack <T>  ::Clear() 
+ {
+	 TLink <T> *tmp = pFirst;
+	 while (pFirst != NULL)
+	 {
+		 pFirst = pFirst->pNext;
+		 delete tmp;
+		 tmp = pFirst;
+	 }
+	 pFirst = NULL;
  }
