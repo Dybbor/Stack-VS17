@@ -1,4 +1,5 @@
-#include "pch.h"
+//#include "pch.h"
+#include "gtest/gtest.h"
 #include "..\Stack\Stack.h"
 
 

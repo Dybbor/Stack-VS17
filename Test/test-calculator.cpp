@@ -1,4 +1,5 @@
-#include "pch.h"
+//#include "pch.h"
+#include "gtest/gtest.h"
 #include "..\Calculator\Calculator.h"
 
 TEST(TCalculator,check_brackets_1_true) 

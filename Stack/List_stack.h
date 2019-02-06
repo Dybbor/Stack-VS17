@@ -4,12 +4,81 @@ template <class T>
 struct TLink 
 {
 	T val;			// значение
-	TLink *pNext;   // указательна следующий элемент
+	TLink <T> *pNext;   // указательна следующий элемент
 };
+
 template <class T>
 class TStack
 {
-	TLink *pFirst // указатель на первое звено
-		TStack() { pFirst = NULL} // конструктор по умолчанию
-	
+	TLink <T> *pFirst;	// указатель на первое звено
+public:
+	TStack() { pFirst = NULL; } // конструктор по умолчанию
+	~TStack();
+	void Push(T elem);	//ѕоложить элемент в стек
+	T Pop();			//¬ытолкнуть элемент из стека
+	T Top();			//ѕосмотреть что находитс€ на вершине стека
+	bool IsEmpty();		//ѕроверка на пустоту стека
+	int  Count();		// оличество звеньев в стеке
 };
+
+template <class T>
+TStack <T> ::~TStack()
+{
+	TLink <T> *tmp = pFirst;
+	while (pFirst != NULL) 
+	{
+		pFirst = pFirst->pNext;
+		delete tmp;
+		tmp = pFirst;
+	}
+}
+template <class T>
+void TStack <T> ::Push(T elem) 
+{
+	TLink <T> *tmp =  new TLink <T>;
+	tmp->val = elem;
+	tmp->pNext = pFirst;
+	pFirst = tmp;
+}
+template <class T>
+T TStack <T> ::Pop() 
+{	
+	if (IsEmpty())
+		throw "Error";
+	T elem;
+	TLink <T> *tmp=pFirst;
+	pFirst = pFirst->pNext;
+	elem = tmp->val;
+	delete tmp;
+	return elem;
+
+	//T elem = pFirst->val;
+	//pFirst = pFirst->pNext;
+	//return elem;
+}
+ template <class T>
+ T TStack <T>::Top() 
+ {
+	 if (IsEmpty())
+		 throw "Error";
+	 return pFirst->val;
+ }
+
+ template <class T>
+ bool TStack <T>::IsEmpty() 
+ {
+	 return (pFirst==NULL);
+ }
+
+ template <class T>
+ int TStack <T> ::Count() 
+ {
+	 TLink <T> * tmp = pFirst;
+	 int count=0;
+	 while (tmp->pNext != NULL)
+	 {
+		 tmp = tmp->pNext;
+		 count++;
+	 }
+	 return count;
+ }
