@@ -1,5 +1,4 @@
 #include <iostream>
-//#include "Stack.h"
 #include "..\Calculator\Calculator.h"
 using namespace std;
 
