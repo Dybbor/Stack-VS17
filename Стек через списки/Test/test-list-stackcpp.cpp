@@ -41,6 +41,12 @@ TEST(TStack, stack_is_empty_return_true1)
 	TStack <int> s;
 	EXPECT_EQ(1, s.IsEmpty());
 }
+TEST(TStack, is_not_empty) 
+{
+	TStack <int> s;
+	s.Push(1);
+	EXPECT_EQ(false, s.IsEmpty());
+}
 
 TEST(TStack, count_element_in_stack1) //Количество эелементов стеке
 {
