@@ -212,7 +212,7 @@ double TCalculator::Calculator()
 			if (postfix[i] == '.') 
 			{
 				str = to_string((int)StackNumber.Pop());
-				str += '.';
+				str += '.'; //Так работает только для оконного приложения, для консольного надо прибавлять ','
 				i++;
 				while (postfix[i] >= '0'&& postfix[i] <= '9'&& postfix.size() >= i)
 				{
