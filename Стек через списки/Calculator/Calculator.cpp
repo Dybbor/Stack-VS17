@@ -80,6 +80,11 @@ void TCalculator::ToPostfix()
 			else
 				throw 5;
 		}
+		if (tmp[i] == '.' || tmp[i] == ',')
+		{
+			postfix += ' ';
+			postfix += '.';
+		}
 	}
 }
 
@@ -141,7 +146,9 @@ bool TCalculator::CheckOperator()
 }
 double TCalculator::Calculator()
 {
-	double num1, num2, res, tmp, a;
+	double num1, num2, res, tmp, a, p;
+	string str;
+	size_t preob;
 	int size = postfix.size();
 	if (size == 0)
 		throw size;
@@ -201,6 +208,22 @@ double TCalculator::Calculator()
 					StackNumber.Push(res);
 					break;
 				}
+			}
+			if (postfix[i] == '.') 
+			{
+				str = to_string((int)StackNumber.Pop());
+				str += '.'; //Так работает только для оконного приложения, для консольного надо прибавлять ','
+				i++;
+				while (postfix[i] >= '0'&& postfix[i] <= '9'&& postfix.size() >= i)
+				{
+					str += postfix[i];
+					i++;
+				}
+
+				preob = (size_t)str.size() - 1;
+				p = stod(str, &preob);
+				StackNumber.Push(p);
+				i--;
 			}
 		}
 		tmp = StackNumber.Pop();
